@@ -8,4 +8,5 @@ public interface ExchangeRateConfigService {
     Flux<ExchangeRateConfig> getAll();
     Mono<ExchangeRateConfig> save(ExchangeRateConfig exchangeRateConfig);
     Mono<ExchangeRateConfig> update(ExchangeRateConfig exchangeRateConfig);
+    Flux<ExchangeRateConfig> findByOriginCurrencyAndDestinyCurrency(String originCurrency, String destinyCurrency);
 }

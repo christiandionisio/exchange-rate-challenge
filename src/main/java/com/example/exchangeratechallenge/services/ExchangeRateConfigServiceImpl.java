@@ -46,4 +46,9 @@ public class ExchangeRateConfigServiceImpl implements ExchangeRateConfigService{
 
         return repository.save(exchangeRateConfig);
     }
+
+    @Override
+    public Flux<ExchangeRateConfig> findByOriginCurrencyAndDestinyCurrency(String originCurrency, String destinyCurrency) {
+        return repository.findByOriginCurrencyAndDestinyCurrency(originCurrency, destinyCurrency);
+    }
 }
