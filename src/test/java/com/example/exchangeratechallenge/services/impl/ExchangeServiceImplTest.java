@@ -4,7 +4,6 @@ import com.example.exchangeratechallenge.models.Exchange;
 import com.example.exchangeratechallenge.models.ExchangeRateConfig;
 import com.example.exchangeratechallenge.repo.ExchangeRateConfigRepository;
 import com.example.exchangeratechallenge.repo.ExchangeRepository;
-import com.example.exchangeratechallenge.repo.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

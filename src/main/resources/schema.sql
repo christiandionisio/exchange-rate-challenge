@@ -1,10 +1,10 @@
-CREATE TABLE user_auth (id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS user_auth (id SERIAL PRIMARY KEY,
     email VARCHAR(255),
     password VARCHAR(255),
     role VARCHAR(255)
 );
 
-CREATE TABLE exchange_rate_config (id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS exchange_rate_config (id SERIAL PRIMARY KEY,
     origin_currency VARCHAR(255),
     destiny_currency VARCHAR(255),
     exchange_rate NUMERIC(10,2),
@@ -15,7 +15,7 @@ CREATE TABLE exchange_rate_config (id SERIAL PRIMARY KEY,
     modification_user VARCHAR(255)
 );
 
-CREATE TABLE exchange (id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS exchange (id SERIAL PRIMARY KEY,
    amount NUMERIC(10,2),
    origin_currency VARCHAR(255),
    destiny_currency VARCHAR(255),
