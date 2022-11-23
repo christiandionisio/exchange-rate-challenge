@@ -56,7 +56,7 @@ public class WebSecurityConfig {
 				.pathMatchers("/webjars/**").permitAll()
 				//SWAGGER PARA SPRING SECURITY
 				.pathMatchers("/login").permitAll()
-				.pathMatchers("/platos/**").authenticated()
+				.pathMatchers("/users/**").permitAll()
 				.anyExchange().authenticated()
 				.and().build();
 	}

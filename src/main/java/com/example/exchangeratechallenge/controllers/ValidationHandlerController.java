@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
-public class ValidationHandler {
+public class ValidationHandlerController {
 
     @ExceptionHandler(WebExchangeBindException.class)
     public ResponseEntity<List<String>> handleException(WebExchangeBindException e) {

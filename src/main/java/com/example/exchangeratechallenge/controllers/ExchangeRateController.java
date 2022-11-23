@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/exchange-rate")
 public class ExchangeRateController {
@@ -31,7 +33,7 @@ public class ExchangeRateController {
     }
 
     @PostMapping
-    Mono<ResponseEntity<ExchangeRateConfig>> save(@RequestBody ExchangeRateConfigDto exchangeRateConfigDto,
+    Mono<ResponseEntity<ExchangeRateConfig>> save(@RequestBody @Valid ExchangeRateConfigDto exchangeRateConfigDto,
                                                   @RequestHeader (name="Authorization") String token) {
         String [] arrayAuth = token.split(" ");
         exchangeRateConfigDto.setRegistryUser(jwtUtil.getUsernameFromToken(arrayAuth[1]));

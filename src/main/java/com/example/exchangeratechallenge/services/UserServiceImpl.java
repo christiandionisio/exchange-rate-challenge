@@ -4,12 +4,12 @@ import com.example.exchangeratechallenge.models.UserAuth;
 import com.example.exchangeratechallenge.repos.UserRepository;
 import com.example.exchangeratechallenge.security.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Mono<UserAuth> save(UserAuth user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return repository.save(user);
     }
 

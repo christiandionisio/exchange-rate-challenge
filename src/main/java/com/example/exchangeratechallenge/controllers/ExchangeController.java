@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/exchanges")
 public class ExchangeController {
@@ -26,7 +28,7 @@ public class ExchangeController {
     }
 
     @PostMapping
-    Mono<ResponseEntity<Exchange>> save(@RequestBody ExchangeDto exchangeDto) {
+    Mono<ResponseEntity<Exchange>> save(@RequestBody @Valid ExchangeDto exchangeDto) {
         return service.save(modelMapper.map(exchangeDto, Exchange.class))
                 .flatMap(resp -> Mono.just(ResponseEntity.status(HttpStatus.CREATED).body(resp)))
                 .defaultIfEmpty(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());

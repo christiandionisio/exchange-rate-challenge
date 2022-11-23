@@ -1,12 +1,18 @@
 package com.example.exchangeratechallenge.dtos;
 
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 
 public class ExchangeDto {
 
     private Integer id;
+    @NotEmpty(message = "amount no debe estar vacio")
     private BigDecimal amount;
+
+    @NotEmpty(message = "originCurrency no debe estar vacio")
     private String originCurrency;
+
+    @NotEmpty(message = "destinyCurrency no debe estar vacio")
     private String destinyCurrency;
 
     public Integer getId() {
