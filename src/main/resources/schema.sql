@@ -27,6 +27,10 @@ CREATE TABLE exchange (id SERIAL PRIMARY KEY,
 
 
 
+
+INSERT INTO user_auth (email, password, role) VALUES ('admin@test.com',
+                                                      '$2a$12$6d8bDr7c0owDMEpRY9HTmeBO1Qt8ZIdPRonG/a6nnGmW/C13bBMXi',
+                                                      'ADMIN');
 INSERT INTO exchange_rate_config (origin_currency, destiny_currency, exchange_rate, date, registry_date, registry_user,
     modification_date, modification_user) VALUES ('PEN', 'EUR', 4.87, '2022-11-22T00:00:00', '2022-11-22T00:00:00',
     'dummy', null, null);
