@@ -1,6 +1,7 @@
 package com.example.exchangeratechallenge.dtos;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class ExchangeRateConfigDto {
@@ -13,7 +14,7 @@ public class ExchangeRateConfigDto {
     @NotEmpty(message = "destinyCurrency no debe estar vacio")
     private String destinyCurrency;
 
-    @NotEmpty(message = "exchangeRate no debe estar vacio")
+    @NotNull(message = "exchangeRate no debe estar vacio")
     private BigDecimal exchangeRate;
 
     private String registryUser;
