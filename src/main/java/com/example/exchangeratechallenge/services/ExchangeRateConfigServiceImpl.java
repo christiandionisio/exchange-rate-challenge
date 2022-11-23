@@ -30,25 +30,36 @@ public class ExchangeRateConfigServiceImpl implements ExchangeRateConfigService{
 
         exchangeRateConfig.setDate(LocalDate.parse(date.format(FORMATTER), FORMATTER).atStartOfDay());
         exchangeRateConfig.setRegistryDate(LocalDate.parse(date.format(FORMATTER), FORMATTER).atStartOfDay());
-        // TODO: set registry user
-        exchangeRateConfig.setRegistryUser("dummy");
 
         return repository.save(exchangeRateConfig);
     }
 
     @Override
     public Mono<ExchangeRateConfig> update(ExchangeRateConfig exchangeRateConfig) {
+
         LocalDate date = LocalDate.now();
-
         exchangeRateConfig.setModificationDate(LocalDate.parse(date.format(FORMATTER), FORMATTER).atStartOfDay());
-        // TODO: set registry user
-        exchangeRateConfig.setModificationUser("dummy-mod");
 
-        return repository.save(exchangeRateConfig);
+        return repository.findById(exchangeRateConfig.getId())
+                .flatMap(respBD -> {
+                    respBD.setOriginCurrency((exchangeRateConfig.getOriginCurrency() != null)
+                            ? exchangeRateConfig.getOriginCurrency() : respBD.getOriginCurrency());
+                    respBD.setDestinyCurrency((exchangeRateConfig.getDestinyCurrency() != null)
+                            ? exchangeRateConfig.getDestinyCurrency() : respBD.getDestinyCurrency());
+                    respBD.setExchangeRate((exchangeRateConfig.getExchangeRate() != null)
+                            ? exchangeRateConfig.getExchangeRate() : respBD.getExchangeRate());
+                    respBD.setDate((exchangeRateConfig.getDate() != null)
+                            ? exchangeRateConfig.getDate() : respBD.getDate());
+                    respBD.setModificationUser(exchangeRateConfig.getModificationUser());
+                    respBD.setModificationDate(exchangeRateConfig.getModificationDate());
+                    return Mono.just(respBD);
+                })
+                .flatMap(repository::save);
     }
 
     @Override
-    public Flux<ExchangeRateConfig> findByOriginCurrencyAndDestinyCurrency(String originCurrency, String destinyCurrency) {
+    public Flux<ExchangeRateConfig> findByOriginCurrencyAndDestinyCurrency(String originCurrency,
+                                                                           String destinyCurrency) {
         return repository.findByOriginCurrencyAndDestinyCurrency(originCurrency, destinyCurrency);
     }
 }

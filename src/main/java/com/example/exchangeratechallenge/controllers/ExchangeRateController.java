@@ -2,6 +2,7 @@ package com.example.exchangeratechallenge.controllers;
 
 import com.example.exchangeratechallenge.dtos.ExchangeRateConfigDto;
 import com.example.exchangeratechallenge.models.ExchangeRateConfig;
+import com.example.exchangeratechallenge.security.JWTUtil;
 import com.example.exchangeratechallenge.services.ExchangeRateConfigService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +22,29 @@ public class ExchangeRateController {
 
     ModelMapper modelMapper = new ModelMapper();
 
+    @Autowired
+    private JWTUtil jwtUtil;
+
     @GetMapping
     Flux<ExchangeRateConfig> findAll() {
         return service.getAll();
     }
 
     @PostMapping
-    Mono<ResponseEntity<ExchangeRateConfig>> save(@RequestBody ExchangeRateConfigDto exchangeRateConfigDto) {
-        // TODO: get user
+    Mono<ResponseEntity<ExchangeRateConfig>> save(@RequestBody ExchangeRateConfigDto exchangeRateConfigDto,
+                                                  @RequestHeader (name="Authorization") String token) {
+        String [] arrayAuth = token.split(" ");
+        exchangeRateConfigDto.setRegistryUser(jwtUtil.getUsernameFromToken(arrayAuth[1]));
         return service.save(modelMapper.map(exchangeRateConfigDto, ExchangeRateConfig.class))
                 .flatMap(resp -> Mono.just(ResponseEntity.status(HttpStatus.CREATED).body(resp)))
                 .defaultIfEmpty(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
     }
 
     @PutMapping
-    Mono<ResponseEntity<ExchangeRateConfig>> update(@RequestBody ExchangeRateConfigDto exchangeRateConfigDto) {
-        // TODO: get user
+    Mono<ResponseEntity<ExchangeRateConfig>> update(@RequestBody ExchangeRateConfigDto exchangeRateConfigDto,
+                                                    @RequestHeader (name="Authorization") String token) {
+        String [] arrayAuth = token.split(" ");
+        exchangeRateConfigDto.setModificationUser(jwtUtil.getUsernameFromToken(arrayAuth[1]));
         return service.update(modelMapper.map(exchangeRateConfigDto, ExchangeRateConfig.class))
                 .flatMap(resp -> Mono.just(ResponseEntity.status(HttpStatus.OK).body(resp)))
                 .defaultIfEmpty(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
