@@ -1,10 +1,10 @@
-package com.example.exchangeratechallenge.services;
+package com.example.exchangeratechallenge.services.impl;
 
 import com.example.exchangeratechallenge.models.UserAuth;
-import com.example.exchangeratechallenge.repos.UserRepository;
+import com.example.exchangeratechallenge.repo.UserRepository;
 import com.example.exchangeratechallenge.security.User;
+import com.example.exchangeratechallenge.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

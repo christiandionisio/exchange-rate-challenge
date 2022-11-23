@@ -1,8 +1,9 @@
-package com.example.exchangeratechallenge.services;
+package com.example.exchangeratechallenge.services.impl;
 
 import com.example.exchangeratechallenge.models.Exchange;
-import com.example.exchangeratechallenge.repos.ExchangeRateConfigRepository;
-import com.example.exchangeratechallenge.repos.ExchangeRepository;
+import com.example.exchangeratechallenge.repo.ExchangeRateConfigRepository;
+import com.example.exchangeratechallenge.repo.ExchangeRepository;
+import com.example.exchangeratechallenge.services.ExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @Service
-public class ExchangeServiceImpl implements ExchangeService{
+public class ExchangeServiceImpl implements ExchangeService {
 
     @Autowired
     private ExchangeRepository repository;

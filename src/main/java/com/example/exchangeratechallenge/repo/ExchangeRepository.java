@@ -1,4 +1,4 @@
-package com.example.exchangeratechallenge.repos;
+package com.example.exchangeratechallenge.repo;
 
 import com.example.exchangeratechallenge.models.Exchange;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

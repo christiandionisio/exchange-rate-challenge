@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -56,7 +55,7 @@ public class WebSecurityConfig {
 				.pathMatchers("/webjars/**").permitAll()
 				//SWAGGER PARA SPRING SECURITY
 				.pathMatchers("/login").permitAll()
-				.pathMatchers("/users/**").permitAll()
+				.pathMatchers("/users/**").authenticated()
 				.anyExchange().authenticated()
 				.and().build();
 	}
